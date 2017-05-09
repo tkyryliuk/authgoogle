@@ -1,0 +1,70 @@
+GOOGLE OpenID connect auth module
+
+---------------------------
+References
+Google specification : https://developers.google.com/accounts/docs/OAuth2Login
+Scopes : https://developers.google.com/+/api/oauth#login-scopes
+openid connect specification : http://openid.net/specs/openid-connect-core-1_0.html
+
+---------------------------
+Register my application on Google  
+
+https://code.google.com/apis/console
+
+Create a project to get : client_id & client_secret
+Add it into the file :/config/authsources.php
+
+'google' => array(
+		'authgoogle:Google',
+		'key' =>'...apps.googleusercontent.com',
+		'secret' => '.....',
+),
+		
+---------------------------
+Example authentication :
+
+1) get code to request access token
+
+https://accounts.google.com/o/oauth2/auth?'
+                                . 'client_id=' . urlencode($this->key)
+                                . '&redirect_uri=' . urlencode($this->linkback)
+                                . '&scope=' . urlencode($scopes)
+                                . '&response_type=code'
+                                . '&access_type=online'
+                                . '&state=' . urlencode($stateID)
+
+2) Google Login
+
+3) Consent access
+
+4) get the code in redirect URL : https://hostname/google/module.php/authgoogle/linkback.php
+
+5) put the code in POST request to get the access token in response
+
+Google token endpoint : https://accounts.google.com/o/oauth2/token 
+
+6) get access token and id token
+
+7) tokens validation
+
+8) if verification OK -> get user's info with access token :
+
+https://www.googleapis.com/plus/v1/people/me/openIdConnect?access_token=
+
+9) returned attributes from Google
+
+Google Response: {
+ "kind": "plus#personOpenIdConnect",
+ "gender": "male",
+ "sub": "...",
+ "name": ".....",
+ "given_name": "Sylvain",
+ "family_name": "Medard",
+ "profile": "https://plus.google.com/...",
+ "picture": "https://...",
+ "email": "...",
+ "email_verified": "true",
+ "locale": ""
+}
+
+

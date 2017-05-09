@@ -1,0 +1,8 @@
+{
+    "name": "tkyryliuk/simplesamlphp-module-authgoogle",
+    "description": "GOOGLE OpenID connect auth module. (based on https://github.com/sylvainmed/simplesamlphp/tree/master/modules/authgoogle)",
+    "type": "simplesamlphp-module",
+    "require": {
+        "simplesamlphp/composer-module-installer": "~1.0"
+    }
+}
